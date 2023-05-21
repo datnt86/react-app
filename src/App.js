@@ -15,7 +15,7 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Hello React, check deployment by Github action
+          Hello React, check deployment
         </a>
       </header>
     </div>
