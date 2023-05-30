@@ -15,29 +15,24 @@ jobs:
         node-version: [16.x]
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v2
       - name: Setup Node.js version ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node-version }}
       - name: Cache node modules
-        id: cache-npm
-        uses: actions/cache@v3
+        id: cache-nodemodules
+        uses: actions/cache@v2
         env:
           cache-name: cache-node-modules
-          with:
-          # npm cache files are stored in `~/.npm` on Linux/macOS
-          path: ~/.npm
+        with:
+          # caching node_modules
+          path: node_modules
           key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-build-${{ env.cache-name }}-
             ${{ runner.os }}-build-
             ${{ runner.os }}-
-
-      - if: ${{ steps.cache-npm.outputs.cache-hit != 'true' }}
-        name: List the state of node modules
-        continue-on-error: true
-        run: npm list
       - name: Install
         run: npm ci
   build:
