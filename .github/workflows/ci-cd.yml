@@ -82,3 +82,4 @@ jobs:
     steps:
       - name: Deploy
         run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
+      - run: echo "github context ${{ toJson(github) }}"
