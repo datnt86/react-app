@@ -74,6 +74,7 @@ jobs:
       - name: Linting
         run: npm run lint
   deploy:
+    if: ${{github.event_name == 'push' && github.ref == 'refs/heads/master'}}
     needs: [build, lint, test]
     runs-on: ubuntu-latest
     strategy:
@@ -82,4 +83,3 @@ jobs:
     steps:
       - name: Deploy
         run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
-      - run: echo "github context ${{ toJson(github) }}"
