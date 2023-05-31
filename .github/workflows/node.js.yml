@@ -40,7 +40,7 @@ jobs:
       - name: Build
         run: npm run build
   test:
-    needs: setup
+    needs: build
     runs-on: ubuntu-lastest
     strategy:
       matrix:
