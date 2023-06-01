@@ -76,10 +76,18 @@ jobs:
   deploy:
     if: ${{github.event_name == 'push' && github.ref == 'refs/heads/master'}}
     needs: [build, lint, test]
-    runs-on: ubuntu-latest
+    runs-on: self-host
     strategy:
       matrix:
         node-version: [16.x]
     steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Setup Node.js version ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Install
+        run: npm ci
       - name: Deploy
-        run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
+        run: npm run build --if-present
