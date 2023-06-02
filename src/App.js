@@ -17,7 +17,7 @@ function App() {
         >
           Hello React, check deployment
         </a>
-        <p  className="App-link">Team number 2</p>
+        <p  className="App-link">Testing CI-CD</p>
       </header>
     </div>
   );
