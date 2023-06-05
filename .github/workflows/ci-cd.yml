@@ -91,3 +91,5 @@ jobs:
         run: npm ci
       - name: Deploy
         run: npm run build --if-present
+      - run: rm -rf /home/ubuntu/dev/build
+      - run: cp -r /home/ubuntu/react/_work/react-app/react-app/build /home/ubuntu/dev
